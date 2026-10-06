@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iris Predictor</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Iris Flower Predictor</h1>
+      <p class="subtitle">Enter flower measurements and predict the species.</p>
+
+      <form id="prediction-form">
+        <div class="grid">
+          <label>
+            Sepal Length
+            <input type="number" step="0.1" id="sepal_length" value="5.1" required />
+          </label>
+
+          <label>
+            Sepal Width
+            <input type="number" step="0.1" id="sepal_width" value="3.5" required />
+          </label>
+
+          <label>
+            Petal Length
+            <input type="number" step="0.1" id="petal_length" value="1.4" required />
+          </label>
+
+          <label>
+            Petal Width
+            <input type="number" step="0.1" id="petal_width" value="0.2" required />
+          </label>
+        </div>
+
+        <button type="submit">Predict</button>
+      </form>
+
+      <div id="result" class="result hidden">
+        <h2>Prediction</h2>
+        <p id="prediction-label"></p>
+        <div id="probabilities"></div>
+      </div>
+
+      <div id="error" class="error hidden"></div>
+    </div>
+
+    <script src="/static/script.js"></script>
+  </body>
+</html>

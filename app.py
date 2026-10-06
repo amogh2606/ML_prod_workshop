@@ -3,13 +3,18 @@ from pathlib import Path
 
 import numpy as np
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 
-MODEL_PATH = Path(__file__).resolve().parent / "iris_model.pkl"
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_PATH = BASE_DIR / "iris_model.pkl"
+STATIC_DIR = BASE_DIR / "static"
 CLASS_NAMES = ["setosa", "versicolor", "virginica"]
 
 app = FastAPI(title="Iris Prediction API")
+app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
 
 with MODEL_PATH.open("rb") as model_file:
@@ -24,8 +29,8 @@ class IrisFeatures(BaseModel):
 
 
 @app.get("/")
-def root() -> dict:
-    return {"message": "Iris model is ready. POST to /predict with 4 flower measurements."}
+def root() -> FileResponse:
+    return FileResponse(STATIC_DIR / "index.html")
 
 
 @app.get("/health")
